@@ -224,6 +224,7 @@ body.light .toggle-thumb{transform:translateX(20px)}
       </div>
       <div class="hero-cta fu">
         <button class="btn btn-primary" onclick="showPage('projects')">View Projects →</button>
+        <button class="btn btn-outline" onclick="showPage('labs')">Practical Labs</button>
         <button class="btn btn-outline" onclick="showPage('contact')">Get in Touch</button>
       </div>
     </div>
@@ -323,7 +324,7 @@ body.light .toggle-thumb{transform:translateX(20px)}
     <div class="section-label" style="margin-top:2rem">projects</div>
     <h2 class="section-title">What I've built</h2>
     <div class="section-div"></div>
-    <p>A collection of security research tools and software projects built during labs, training, and personal exploration.</p>
+    <p>Security research tools and software projects built during training and personal exploration.</p>
   </div>
   <div class="projects-list">
 
@@ -661,7 +662,7 @@ body.light .toggle-thumb{transform:translateX(20px)}
 <footer id="site-footer">
   <span class="footer-logo">~/muhammed-hisham</span>
   <span>Manama, Bahrain 🇧🇭 · 2025</span>
-  <span style="font-family:var(--mono);font-size:.75rem">Built with HTML </span>
+  <span style="font-family:var(--mono);font-size:.75rem">Built with HTML</span>
 </footer>
 
 <!-- TOAST -->
@@ -686,6 +687,18 @@ function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
   window.scrollTo(0, 0);
+  // highlight active nav link
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.style.color = '';
+    a.style.fontWeight = '';
+  });
+  const map = { home:'home', projects:'projects', labs:'labs', experience:'home', contact:'contact', about:'about' };
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    if (a.getAttribute('onclick') && a.getAttribute('onclick').includes("'"+id+"'")) {
+      a.style.color = 'var(--accent)';
+      a.style.fontWeight = '700';
+    }
+  });
   // re-trigger reveal on newly shown page
   document.querySelectorAll('#page-' + id + ' .reveal').forEach(el => {
     el.classList.remove('visible');
